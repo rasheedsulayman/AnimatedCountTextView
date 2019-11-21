@@ -6,26 +6,23 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
-import com.r4sh33d.animatedcounttextview.NumberType.DECIMAL
-import com.r4sh33d.animatedcounttextview.NumberType.INTEGER
+import com.r4sh33d.animatedcounttextview.NumberType.Integer
+import java.text.DecimalFormat
 
 class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     AppCompatTextView(context, attrs) {
     private lateinit var valueAnimator: ValueAnimator
-    private var numberType: NumberType = INTEGER
+    private var numberType: NumberType = Integer()
     private var startValue: Number = 0f
     private var endValue: Number = 0f
     private var animationDuration: Long? = null
     private var animationEndListener: AnimationEndListener? = null
 
-    private lateinit var number: Number
-
     fun startWith(value: Number) {
-        numberType = if (value is Int) INTEGER else DECIMAL
         startValue = value
     }
 
-    fun duration(duration: Long){
+    fun duration(duration: Long) {
         animationDuration = duration
     }
 
@@ -38,40 +35,37 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     }
 
     fun play() {
-        if (::valueAnimator.isInitialized && valueAnimator.isRunning){
+        if (::valueAnimator.isInitialized && valueAnimator.isRunning) {
             valueAnimator.end()
         }
-
-        valueAnimator = if (numberType == INTEGER) {
+        valueAnimator = if (numberType is Integer) {
             ValueAnimator.ofInt(startValue.toInt(), endValue.toInt())
         } else {
             ValueAnimator.ofFloat(startValue.toFloat(), endValue.toFloat())
         }.apply {
-
-            duration = animationDuration?: duration
-
+            duration = animationDuration ?: duration
             addUpdateListener {
-                text = it.animatedValue.toString()
+                text = numberType.formatter.format(it.animatedValue.toString())
             }
-
-            addListener(object : AnimatorListenerAdapter(){
+            addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
-                    animationEndListener?.onAnimationEnd()
+                    animationEndListener?.onCountFinish()
                 }
             })
-
             start()
         }
     }
 
     fun stop() {
-
+        if (::valueAnimator.isInitialized) valueAnimator.end()
     }
 }
 
 interface AnimationEndListener {
-    fun onAnimationEnd();
+    fun onCountFinish()
 }
-enum class NumberType {
-    INTEGER, DECIMAL
+
+sealed class NumberType(val formatter: DecimalFormat) {
+    class Integer(format: DecimalFormat = wholeNumberDecimalFormat) : NumberType(format)
+    class Decimal(format: DecimalFormat = twoDecimalPlacesFormat) : NumberType(format)
 }
