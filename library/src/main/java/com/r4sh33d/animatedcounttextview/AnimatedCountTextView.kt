@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Interpolator
 import androidx.appcompat.widget.AppCompatTextView
 import com.r4sh33d.animatedcounttextview.NumberType.Integer
 import java.text.DecimalFormat
@@ -17,6 +19,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     private var endValue: Number = 0f
     private var animationDuration: Long? = null
     private var animationEndListener: AnimationEndListener? = null
+    private var interpolator: Interpolator = AccelerateDecelerateInterpolator()
 
     fun startWith(value: Number) {
         startValue = value
@@ -32,6 +35,10 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
 
     fun numberType(numberType: NumberType) {
         this.numberType = numberType
+    }
+
+    fun interpolator(interpolator: Interpolator) {
+        this.interpolator = interpolator
     }
 
     fun play() {
