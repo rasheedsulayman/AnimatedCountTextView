@@ -17,7 +17,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     private var numberType: NumberType = Integer()
     private var startValue: Number = 0f
     private var endValue: Number = 0f
-    private var animationDuration: Long? = null
+    private var animationDuration: Long
     private var animationEndListener: AnimationEndListener? = null
     private var animationinterpolator: Interpolator = AccelerateDecelerateInterpolator()
 
@@ -37,6 +37,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
                 getInt(R.styleable.AnimatedCountTextView_numberType, 1).let {
                     numberType = if (it == 1) Integer() else Decimal()
                 }
+                animationDuration = getInt(R.styleable.AnimatedCountTextView_duration, 300).toLong()
             } finally {
                 recycle()
             }
@@ -72,7 +73,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
         } else {
             ValueAnimator.ofFloat(startValue.toFloat(), endValue.toFloat())
         }.apply {
-            duration = animationDuration ?: duration
+            duration = animationDuration
             interpolator = animationinterpolator
             addUpdateListener {
                 text = numberType.formatter.format(it.animatedValue.toString())
