@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <declare-styleable name="AnimatedCountTextView">
+        <attr name="startWith" format="string"/>
+        <attr name="endWith" format="string"/>
+        <attr name="duration" format="integer"/>
+
+
+        <attr name="numberType">
+            <enum name="integer" value="1" />
+            <enum name="decimal" value="2" />
+        </attr>
+
     </declare-styleable>
+
 </resources>

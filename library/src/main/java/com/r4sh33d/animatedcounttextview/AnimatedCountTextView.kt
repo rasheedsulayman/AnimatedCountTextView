@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
 import androidx.appcompat.widget.AppCompatTextView
-import com.r4sh33d.animatedcounttextview.NumberType.Integer
+import com.r4sh33d.animatedcounttextview.NumberType.*
 import java.text.DecimalFormat
 
 class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
@@ -19,7 +19,29 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     private var endValue: Number = 0f
     private var animationDuration: Long? = null
     private var animationEndListener: AnimationEndListener? = null
-    private var interpolator: Interpolator = AccelerateDecelerateInterpolator()
+    private var animationinterpolator: Interpolator = AccelerateDecelerateInterpolator()
+
+    init {
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.AnimatedCountTextView,
+            0, 0
+        ).run {
+            try {
+                getString(R.styleable.AnimatedCountTextView_startWith)?.run {
+                    startValue = toFloat()
+                }
+                getString(R.styleable.AnimatedCountTextView_endWith)?.run {
+                    endValue = toFloat()
+                }
+                getInt(R.styleable.AnimatedCountTextView_numberType, 1).let {
+                    numberType = if (it == 1) Integer() else Decimal()
+                }
+            } finally {
+                recycle()
+            }
+        }
+    }
 
     fun startWith(value: Number) {
         startValue = value
@@ -38,7 +60,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     }
 
     fun interpolator(interpolator: Interpolator) {
-        this.interpolator = interpolator
+        animationinterpolator = interpolator
     }
 
     fun play() {
@@ -51,6 +73,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
             ValueAnimator.ofFloat(startValue.toFloat(), endValue.toFloat())
         }.apply {
             duration = animationDuration ?: duration
+            interpolator = animationinterpolator
             addUpdateListener {
                 text = numberType.formatter.format(it.animatedValue.toString())
             }
