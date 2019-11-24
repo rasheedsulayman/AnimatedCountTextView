@@ -54,29 +54,6 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
         }
     }
 
-    fun startWith(value: Number) {
-        startValue = value
-    }
-
-    fun duration(duration: Long) {
-        animationDuration = duration
-    }
-
-    fun endWith(value: Number) {
-        endValue = value
-    }
-
-    fun numberType(numberType: NumberType) {
-        this.numberType = numberType
-    }
-
-    fun interpolator(interpolator: Interpolator) {
-        animationinterpolator = interpolator
-    }
-
-    fun countEndListener(countEndListener: CountEndListener) {
-        this.animationEndListener = countEndListener
-    }
 
     @SuppressLint("SetTextI18n")
     fun play() {
@@ -102,7 +79,43 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
         }
     }
 
+    // ---> Begin Public APIs
+
+    fun startWith(value: Number) {
+        startValue = value
+    }
+
+    fun duration(duration: Long) {
+        animationDuration = duration
+    }
+
+    fun endWith(value: Number) {
+        endValue = value
+    }
+
+    fun numberType(numberType: NumberType) {
+        this.numberType = numberType
+    }
+
+    fun interpolator(interpolator: Interpolator) {
+        animationinterpolator = interpolator
+    }
+
+    fun countEndListener(countEndListener: CountEndListener) {
+        this.animationEndListener = countEndListener
+    }
+
+    fun prefix(prefix: String) {
+        this.prefix = prefix
+    }
+
+    fun suffix(suffix: String) {
+        this.suffix = suffix
+    }
+
     fun stop() {
         if (::valueAnimator.isInitialized) valueAnimator.end()
     }
+
+    // ---> End Public APIs
 }
