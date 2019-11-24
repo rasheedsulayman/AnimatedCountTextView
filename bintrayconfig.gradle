@@ -42,7 +42,7 @@ publish {
   groupId = 'com.r4sh33d'
   artifactId = 'AnimatedCountTextView'
   publishVersion = versions.publishVersion
-  desc = 'A library to ...'
+  desc = 'A library that helps you animate change in numeric values in a TextView'
   website = 'https://github.com/r4sh33d/AnimatedCountTextView'
   dryRun = false
 }
