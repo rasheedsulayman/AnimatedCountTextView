@@ -44,6 +44,11 @@ countTextView.countEndListener(object : CountEndListener {
    })
 ```
 
+If required, you can also stop the count at any time by calling the `stop()` method:
+```kotlin
+countTextView.stop()
+```
+
 That's all for basic usage. Your `AnimatedCountTextView` should animate form your `startWith` value to `endWith` value within the given time `duration`.
 
 ## Customisation
@@ -108,7 +113,12 @@ or programmatically:
  countTextView.suffix("%")
 ```
 
- 
+### Interpolator
+You can specify the [Interpolator](https://developer.android.com/reference/android/view/animation/Interpolator) to use when animating the values. This can only be done programmatically:
+```kotlin
+countTextView.interpolator(AccelerateDecelerateInterpolator())
+```
+
 ##  License
 
     Copyright (c) 2019 Rasheed Sulayman.
