@@ -11,6 +11,7 @@
         app:endWith="100"
         app:duration="4000"
         app:suffix="%"
+        app:prefix="$"
         app:numberType="integer"
         android:id="@+id/countTextView"
         android:layout_width="wrap_content"

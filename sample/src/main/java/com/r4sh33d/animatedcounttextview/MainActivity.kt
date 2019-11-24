@@ -6,8 +6,14 @@ import android.util.Log
 import android.view.animation.AccelerateInterpolator
 import com.r4sh33d.R
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity(), CountEndListener {
+    private val twoDecimalPlacesFormat =
+        (NumberFormat.getNumberInstance() as DecimalFormat).apply {
+            applyPattern("#0.00")
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +29,13 @@ class MainActivity : AppCompatActivity(), CountEndListener {
             countTextView.startWith(0)
             countTextView.endWith(100)
             countTextView.duration(100)
+            countTextView.numberType(NumberType.Integer())
+            countTextView.numberType(NumberType.Decimal(twoDecimalPlacesFormat))
+
+            countTextView.prefix("$")
+            countTextView.suffix("%")
+
+
         }
     }
 

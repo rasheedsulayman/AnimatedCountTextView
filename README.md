@@ -55,9 +55,9 @@ You can use the xml attributes `startWith` and the `endWith` values to specify t
  
 ```xml
 <com.r4sh33d.animatedcounttextview.AnimatedCountTextView
-     ...
-     app:startWith="0"
-     app:endWith="100"/>
+    ...
+    app:startWith="0"
+    app:endWith="100"/>
 ```
 or programmatically:
 ```kotlin
@@ -70,14 +70,44 @@ You can specify the duration(in milliseconds) for the count-up or count-down ani
  
 ```xml
 <com.r4sh33d.animatedcounttextview.AnimatedCountTextView
-     ...
-     app:duration="4000"
-/>
+    ...
+    app:duration="4000"/>
 ```
 or programmatically:
 ```kotlin
 countTextView.duration(4000)
 ```
+
+### NumberType
+You can use `NumberType` to specify the type of number you want to animate. You can either specify `NumberType.Integer()` or `NumberType.Decimal()`. You can also apply custom formatting to display the animated values. Custom formats can be specified by passing a `DecimalFormat` to `NumberType.Integer()` or `NumberType.Decimal()` constructor. The default `NumberType` is `Integer`.
+ 
+```xml
+<com.r4sh33d.animatedcounttextview.AnimatedCountTextView
+    ...
+    app:numberType="integer"/>
+```
+Programmatically:
+```kotlin
+countTextView.numberType(NumberType.Decimal(twoDecimalPlacesFormat))
+//or 
+countTextView.numberType(NumberType.Integer())
+```
+### Prefix and Suffix
+You can specify `prefix` and/or `suffix` to the animated values. This is useful if you want to specify a currency symbol as a `prefix` or the percentage sign as the `suffix`.
+ 
+```xml
+<com.r4sh33d.animatedcounttextview.AnimatedCountTextView
+    ...
+    app:suffix="%"
+    app:prefix="$"/>
+```
+or programmatically:
+```kotlin
+ countTextView.prefix("$")
+// or 
+ countTextView.suffix("%")
+```
+
  
 ##  License
 

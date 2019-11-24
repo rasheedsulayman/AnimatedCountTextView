@@ -47,7 +47,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
                 getInt(R.styleable.AnimatedCountTextView_numberType, 1).let {
                     numberType = if (it == 1) Integer() else Decimal()
                 }
-                animationDuration = getInt(R.styleable.AnimatedCountTextView_duration, 300).toLong()
+                animationDuration = getInt(R.styleable.AnimatedCountTextView_duration, 4000).toLong()
             } finally {
                 recycle()
             }

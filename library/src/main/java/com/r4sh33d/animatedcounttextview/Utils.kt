@@ -12,12 +12,12 @@ sealed class NumberType(val formatter: DecimalFormat) {
     class Decimal(format: DecimalFormat = twoDecimalPlacesFormat) : NumberType(format)
 }
 
-val wholeNumberDecimalFormat =
+internal val wholeNumberDecimalFormat =
     (NumberFormat.getNumberInstance() as DecimalFormat).apply {
         applyPattern("#0")
     }
 
-val twoDecimalPlacesFormat =
+internal val twoDecimalPlacesFormat =
     (NumberFormat.getNumberInstance() as DecimalFormat).apply {
         applyPattern("#0.00")
     }
