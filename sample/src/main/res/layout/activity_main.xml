@@ -7,11 +7,6 @@
     tools:context="com.r4sh33d.animatedcounttextview.MainActivity">
 
     <com.r4sh33d.animatedcounttextview.AnimatedCountTextView
-        app:startWith="0"
-        app:endWith="100"
-        app:duration="4000"
-        app:suffix="%"
-        app:numberType="integer"
         android:id="@+id/countTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,13 +16,18 @@
         android:layout_marginBottom="80dp"
         android:text="0"
         android:textSize="30sp"
+        app:duration="4000"
+        app:endWith="100"
         app:layout_constraintBottom_toTopOf="@+id/playButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.13"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        app:numberType="integer"
+        app:startWith="0"
+        app:suffix="%" />
 
     <Button
         android:id="@+id/playButton"
