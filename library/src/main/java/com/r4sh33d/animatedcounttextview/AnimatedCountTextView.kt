@@ -54,9 +54,8 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
         }
     }
 
-
     @SuppressLint("SetTextI18n")
-    fun play() {
+    fun start() {
         if (::valueAnimator.isInitialized && valueAnimator.isRunning) {
             valueAnimator.end()
         }

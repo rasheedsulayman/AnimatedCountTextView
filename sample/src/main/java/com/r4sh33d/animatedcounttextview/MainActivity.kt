@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.animation.AccelerateInterpolator
 import com.r4sh33d.R
-import com.r4sh33d.animatedcounttextview.NumberType.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.text.DecimalFormat
-import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity(), CountEndListener {
 
@@ -16,11 +13,18 @@ class MainActivity : AppCompatActivity(), CountEndListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         playButton.setOnClickListener {
-            textView.run {
+            countTextView.run {
                 countEndListener(this@MainActivity)
                 interpolator(AccelerateInterpolator())
-                play()
+                start()
             }
+            countTextView.start()
+
+            countTextView.countEndListener(object : CountEndListener{
+                override fun onCountFinish() {
+
+                }
+            })
         }
     }
 
