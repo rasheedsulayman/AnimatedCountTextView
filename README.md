@@ -1,6 +1,6 @@
 # AnimatedCountTextView
 
-A library that helps you animate change in numeric values in a TextView.
+A library that helps you animate change in numeric values in a `TextView`.
 
 ## Gradle Dependency
 
@@ -15,17 +15,17 @@ implementation 'com.r4sh33d:AnimatedCountTextView:0.0.1'
 Add the `AnimatedCountTextView` to your layout. 
 
 ```xml
-       <com.r4sh33d.animatedcounttextview.AnimatedCountTextView
-           app:startWith="0"
-           app:endWith="100"
-           app:duration="4000"
-           app:suffix="%"
-           app:numberType="integer"
-           android:id="@+id/textView"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="0"
-           android:textSize="30sp" />
+<com.r4sh33d.animatedcounttextview.AnimatedCountTextView
+    app:startWith="0"
+    app:endWith="100"
+    app:duration="4000"
+    app:suffix="%"
+    app:numberType="integer"
+    android:id="@+id/textView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="0"
+    android:textSize="30sp" />
 ```
 
 Then call the `start()` method to start the count: 
@@ -38,14 +38,47 @@ You can optionally listen for the count end event by setting a `CountEndListener
 
 ```kotlin
 countTextView.countEndListener(object : CountEndListener {
-           override fun onCountFinish() {
-                     // Do something 
-               }
-      })
+      override fun onCountFinish() {
+           // Do something 
+      }
+   })
 ```
 
-That's all for basic usage. Your `countTextView` should animate form your `startWith` value to `endWith` value within the given time `duration`.
+That's all for basic usage. Your `AnimatedCountTextView` should animate form your `startWith` value to `endWith` value within the given time `duration`.
 
+## Customisation
+`AnimatedCountTextView` attempts to use some default values to simplify the usage. The behaviour can be further 
+customized by setting the following attributes via `xml` or `code`. 
+
+### Start and End values
+You can use the xml attributes `startWith` and the `endWith` values to specify the value to animate from, and value to animate to, respectively.  
+ 
+```xml
+<com.r4sh33d.animatedcounttextview.AnimatedCountTextView
+     ...
+     app:startWith="0"
+     app:endWith="100"/>
+```
+or programmatically:
+```kotlin
+countTextView.startWith(0)
+countTextView.endWith(100)
+```
+
+### Duration
+You can specify the duration(in milliseconds) for the count-up or count-down animation using the `duration` attribute in xml.   
+ 
+```xml
+<com.r4sh33d.animatedcounttextview.AnimatedCountTextView
+     ...
+     app:duration="4000"
+/>
+```
+or programmatically:
+```kotlin
+countTextView.duration(4000)
+```
+ 
 ##  License
 
     Copyright (c) 2019 Rasheed Sulayman.

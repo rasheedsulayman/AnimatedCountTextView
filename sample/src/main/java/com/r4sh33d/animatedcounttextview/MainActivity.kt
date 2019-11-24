@@ -20,11 +20,9 @@ class MainActivity : AppCompatActivity(), CountEndListener {
             }
             countTextView.start()
 
-            countTextView.countEndListener(object : CountEndListener{
-                override fun onCountFinish() {
-
-                }
-            })
+            countTextView.startWith(0)
+            countTextView.endWith(100)
+            countTextView.duration(100)
         }
     }
 
