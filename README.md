@@ -2,6 +2,8 @@
 
 A library that helps you animate change in numeric values in a `TextView`.
 
+[![Build Status](https://travis-ci.com/r4sh33d/AnimatedCountTextView.svg?token=8TPyvGS2YqpBT3ypdxNc&branch=master)](https://travis-ci.com/r4sh33d/AnimatedCountTextView)
+
 ## Gradle Dependency
 
 Add the dependency to your app's `build.gradle`:
@@ -83,7 +85,7 @@ or programmatically:
 countTextView.duration(4000)
 ```
 
-### NumberType
+### Number Type
 You can use `NumberType` to specify the type of number you want to animate. You can either specify `NumberType.Integer()` or `NumberType.Decimal()`. You can also apply custom formatting to display the animated values. Custom formats can be specified by passing a `DecimalFormat` to `NumberType.Integer()` or `NumberType.Decimal()` constructor. The default `NumberType` is `Integer`.
  
 ```xml
