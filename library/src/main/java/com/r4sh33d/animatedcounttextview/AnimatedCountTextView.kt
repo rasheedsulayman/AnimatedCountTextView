@@ -3,8 +3,10 @@ package com.r4sh33d.animatedcounttextview
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Interpolator
 import androidx.appcompat.widget.AppCompatTextView
@@ -18,8 +20,10 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     private var startValue: Number = 0f
     private var endValue: Number = 0f
     private var animationDuration: Long
-    private var animationEndListener: AnimationEndListener? = null
+    private var animationEndListener: CountEndListener? = null
     private var animationinterpolator: Interpolator = AccelerateDecelerateInterpolator()
+    private var prefix = ""
+    private var suffix = ""
 
     init {
         context.theme.obtainStyledAttributes(
@@ -28,6 +32,12 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
             0, 0
         ).run {
             try {
+                getString(R.styleable.AnimatedCountTextView_prefix)?.let {
+                    prefix = it
+                }
+                getString(R.styleable.AnimatedCountTextView_suffix)?.let {
+                    suffix = it
+                }
                 getString(R.styleable.AnimatedCountTextView_startWith)?.run {
                     startValue = toFloat()
                 }
@@ -64,6 +74,11 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
         animationinterpolator = interpolator
     }
 
+    fun countEndListener(countEndListener: CountEndListener) {
+        this.animationEndListener = countEndListener
+    }
+
+    @SuppressLint("SetTextI18n")
     fun play() {
         if (::valueAnimator.isInitialized && valueAnimator.isRunning) {
             valueAnimator.end()
@@ -76,7 +91,7 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
             duration = animationDuration
             interpolator = animationinterpolator
             addUpdateListener {
-                text = numberType.formatter.format(it.animatedValue.toString())
+                text = "$prefix${numberType.formatter.format(it.animatedValue.toString().toFloat())}$suffix"
             }
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
@@ -90,13 +105,4 @@ class AnimatedCountTextView(context: Context, attrs: AttributeSet?) :
     fun stop() {
         if (::valueAnimator.isInitialized) valueAnimator.end()
     }
-}
-
-interface AnimationEndListener {
-    fun onCountFinish()
-}
-
-sealed class NumberType(val formatter: DecimalFormat) {
-    class Integer(format: DecimalFormat = wholeNumberDecimalFormat) : NumberType(format)
-    class Decimal(format: DecimalFormat = twoDecimalPlacesFormat) : NumberType(format)
 }
