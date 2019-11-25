@@ -38,7 +38,7 @@ def (user, key) = getBintrayUserAndKey()
 publish {
   bintrayUser = user
   bintrayKey = key
-  userOrg = 'R4sh33d'
+  userOrg = 'r4sh33d'
   groupId = 'com.r4sh33d'
   artifactId = 'AnimatedCountTextView'
   publishVersion = versions.publishVersion

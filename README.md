@@ -3,6 +3,7 @@
 A library that helps you animate change in numeric values in a `TextView`.
 
 [![Build Status](https://travis-ci.com/r4sh33d/AnimatedCountTextView.svg?token=8TPyvGS2YqpBT3ypdxNc&branch=master)](https://travis-ci.com/r4sh33d/AnimatedCountTextView)
+[ ![Download](https://api.bintray.com/packages/r4sh33d/maven/AnimatedCountTextView/images/download.svg) ](https://bintray.com/r4sh33d/maven/AnimatedCountTextView/_latestVersion)
 
 ## Gradle Dependency
 
