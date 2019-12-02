@@ -111,9 +111,9 @@ You can specify `prefix` and/or `suffix` to the animated values. This is useful 
 ```
 or programmatically:
 ```kotlin
- countTextView.prefix("$")
-// or 
- countTextView.suffix("%")
+countTextView.prefix("$")
+//or 
+countTextView.suffix("%")
 ```
 
 ### Interpolator
